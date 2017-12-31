@@ -104,12 +104,22 @@ gem 'httparty'
 gem 'sidekiq'
 gem 'audited'
 gem 'acts-as-taggable-on'
-gem 'factory_bot'
+gem 'factory_bot_rails'
 gem 'bootstrap-generators'
 gem 'faker'
 gem 'faker-japanese'
 gem 'breadcrumbs_on_rails'
 gem 'i18n-tasks'
+gem 'google-analytics-rails'
+gem 'dotenv-rails'
+gem 'gentelella-rails'
+
+# マークダウン
+gem 'qiita-markdown'
+gem 'github-linguist'
+
+gem 'honoka-rails'
+
 group :development, :test do
   gem 'timecop'
   gem 'rspec'
@@ -133,6 +143,7 @@ group :development do
   gem 'pry-rails'
   gem 'hirb'
   gem 'hirb-unicode'
+  gem 'rails-erd'
 end
 
 gem 'devise'

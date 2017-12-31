@@ -1,0 +1,27 @@
+%a{ href: '#menu-toggle', class: 'btn btn-primary', id: 'menu-toggle' } Toggle Menu
+
+.page-header
+  .btn-toolbar.pull-right
+    .btn-group
+      = link_to new_ubiquitous_term_path, class: 'btn btn-default' do
+        %span.glyphicon.glyphicon-list-alt New
+  %h2= title controller.controller_name
+
+.row
+  .col-xs-12
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th{ scope: 'col' } #
+          %th{ scope: 'col' } Domain Name
+          %th{ scope: 'col' } Program Singularized Name
+          %th{ scope: 'col' } Program Pluralized Name
+          %th{ scope: 'col' } Note
+      %tbody
+        - @ubiquitous_terms.each do |ubiquitous_term|
+          %tr
+            %th{ scope: 'row' }= ubiquitous_term.id
+            %td= ubiquitous_term.domain_name
+            %td= ubiquitous_term.program_singularized_name
+            %td= ubiquitous_term.program_pluralized_name
+            %td= ubiquitous_term.note

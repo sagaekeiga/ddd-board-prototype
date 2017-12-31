@@ -1,0 +1,99 @@
+.page-header
+  %h1
+    = controller.action_name == 'index' ? 'DDD Board Prototype' : controller.action_name.capitalize + ' Board'
+    %small <code>分析モデル</code>と<code>実装モデル</code>を一致させるためのスペースです。
+
+.row
+  .col-xs-12
+    %h3.title-bar 分析モデル
+    %p 手動で実装モデルを作図します。
+    %p 実装モデルと視覚的に比較できるようになります。ドメインエキスパートが主導で操作する場所になります。
+    %table.table.table-bordered.analysis-model
+      %tbody
+        - Settings[:tr_alphabet].each.with_index(1) do |tr_symbol, index|
+          %tr
+            - td_times(tr_symbol).times do |td_number|
+              %td{ rowspan: return_two_span(tr_symbol + td_number.to_s), class: 'square-box' }
+                .content
+                  - if Pictgram.find_by(td_number: tr_symbol + td_number.to_s).present?
+                    - if Domain.find_by(id: Pictgram.find_by(td_number: tr_symbol + td_number.to_s).domain_id)
+                      %i.fa.fa-user-circle-o
+                      .caption= Domain.find_by(id: Pictgram.find_by(td_number: tr_symbol + td_number.to_s).domain_id).logical_name
+                    - else
+                      = Connector.find_by(id: Pictgram.find_by(td_number: tr_symbol + td_number.to_s).connector_id).show_name
+                      %i{ class: "#{Connector.find_by(id: Pictgram.find_by(td_number: tr_symbol + td_number.to_s).connector_id).direction}" }
+                  - else
+                    = link_to '　', new_pictgram_path(td_number: tr_symbol + td_number.to_s), remote: true
+                #new-selects.modal.fade{ tabindex: '-1', role: 'dialog', 'aria-hidden': 'true' }
+
+.row
+  = link_to '作成', domains_path, method: :post, class: 'btn btn-primary btn-block'
+  %a{ href: '#menu-toggle', class: 'btn btn-primary', id: 'menu-toggle' } Toggle Menu
+  .col-xs-12
+    %h3.title-bar 実装モデル
+    %p アプリケーションファイルを読み込んで自動で実装モデルを作図します。
+    %p 分析モデルと比較して何が違うかを視覚的に判断できるようになります。
+    %object{ data: "/erd.pdf", type: "application/pdf", width: '100%', height: '700' }
+
+.row
+  .col-xs-12
+    %h3.title-bar 実装モデル 概要
+    %table.table.table-bordered
+      %thead
+        %tr.active
+          %th{ scope: 'col' } No.
+          %th{ scope: 'col' } Physical Name
+          %th{ scope: 'col' } Logical Name
+          %th{ scope: 'col' } Note
+      - @domains.each.with_index do |domain, index|
+        %tbody
+          %tr
+            %td= domain.id
+            %td= domain.physical_name
+            %td= domain.logical_name
+            %td= domain.note
+
+.row
+  .col-xs-12
+    %h3.title-bar 実装モデル 詳細
+  - @domains.each do |domain|
+    .col-md-6.col-xs-12
+      %h4.logical-name-bar
+        = domain.logical_name
+
+      %table.table.table-bordered
+        %thead
+          %tr.active
+            %th{ scope: 'col' } No.
+            %th{ scope: 'col' }
+        %tbody
+          %tr
+            %td domain id
+            %td= domain.id
+          %tr
+            %td domain physical_name
+            %td= domain.physical_name
+          %tr
+            %td domain logical_name
+            %td= domain.logical_name
+          %tr
+            %td domain note
+            %td= domain.note
+          %tr
+            %td Relation（belongs_to)
+            %td
+              - domain.logical_name.constantize.reflect_on_all_associations(:belongs_to).each do |belongs_to_model|
+                = belongs_to_model.plural_name
+          %tr
+            %td Relation（has_many)
+            %td
+              - domain.logical_name.constantize.reflect_on_all_associations(:has_many).each do |has_many_model|
+                = has_many_model.plural_name
+          %tr
+            %td Relation（has_one)
+            %td
+              - domain.logical_name.constantize.reflect_on_all_associations(:has_one).each do |has_one_model|
+                = has_one_model.plural_name
+      .col-xs-4.pull-right
+        = link_to edit_domain_path(domain.id), class: 'btn btn-default btn-block' do
+          %span.glyphicon.glyphicon-list-alt Edit

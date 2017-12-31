@@ -1,0 +1,44 @@
+.page-header
+  .btn-toolbar.pull-right
+    .btn-group
+      = link_to ubiquitous_terms_path, class: 'btn btn-default' do
+        %span.glyphicon.glyphicon-list-alt Back
+  %h2= title controller.controller_name
+
+.col-xs-12
+  = form_for @ubiquitous_term, html: { class: 'form-horizontal', role: 'form' } do |f|
+
+    - if @ubiquitous_term.errors.any?
+      .alert.alert-danger.alert-dismissable{ role: 'alert' }
+        %button.close{ type: 'button', data: { dismiss: 'alert' } }
+          %span{ aria: { hidden: 'true' } } &times;
+          %span.sr-only Close
+        %h4= "#{pluralize(@ubiquitous_term.errors.count, t('.errors'))}"
+
+        %ul
+          - @ubiquitous_term.errors.full_messages.each do |msg|
+            %li= msg
+
+    .form-group
+      = f.label :domain_name, class: 'col-xs-3 control-label control-label-required'
+      .col-xs-9
+        = f.text_field :domain_name, class: 'form-control'
+
+    .form-group
+      = f.label :program_singularized_name, class: 'col-xs-3 control-label control-label-required'
+      .col-xs-9
+        = f.text_field :program_singularized_name, class: 'form-control'
+
+    .form-group
+      = f.label :program_pluralized_name, class: 'col-xs-3 control-label control-label-required'
+      .col-xs-9
+        = f.text_field :program_pluralized_name, class: 'form-control'
+
+    .form-group
+      = f.label :note, class: 'col-xs-3 control-label control-label-required'
+      .col-xs-9
+        = f.text_area :note, class: 'form-control'
+
+    .form-group
+      .col-xs-2.pull-right
+        = f.submit 'create', class: 'btn btn-primary btn-block'

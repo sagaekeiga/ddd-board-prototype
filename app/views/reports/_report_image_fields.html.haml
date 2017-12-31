@@ -1,0 +1,10 @@
+.row.nested-fields.field
+  .col-sm-10
+    = f.file_field :image
+    - if f.object.persisted?
+      %br
+      = image_tag f.object.image.url, width: '100'
+
+  .col-sm-2
+    = link_to_remove_association '削除', f, class: 'btn btn-danger btn-block'
+%br

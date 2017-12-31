@@ -1,0 +1,4 @@
+- require 'action_dispatch/routing/inspector'
+%h1= controller.action_name == 'index' ? 'DDD Board Prototype' : controller.action_name.capitalize + ' Board'
+%p Activityが表示されるページです。Userモデルを作成すれば、各userのActivityを表示します。プロジェクトの動きを確認できます。
+%a{ href: '#menu-toggle', class: 'btn btn-primary', id: 'menu-toggle' } Toggle Menu

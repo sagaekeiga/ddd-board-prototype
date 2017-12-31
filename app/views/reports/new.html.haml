@@ -1,0 +1,49 @@
+.page-header
+  .btn-toolbar.pull-right
+    .btn-group
+      = link_to reports_path, class: 'btn btn-default' do
+        %span.glyphicon.glyphicon-list-alt Back
+  %h2= title controller.controller_name
+
+.col-xs-12
+  = form_for @report, html: { class: 'form-horizontal', role: 'form' } do |f|
+
+    - if @report.errors.any?
+      .alert.alert-danger.alert-dismissable{ role: 'alert' }
+        %button.close{ type: 'button', data: { dismiss: 'alert' } }
+          %span{ aria: { hidden: 'true' } } &times;
+          %span.sr-only Close
+        %h4= "#{pluralize(@report.errors.count, t('.errors'))}"
+
+        %ul
+          - @report.errors.full_messages.each do |msg|
+            %li= msg
+
+    .form-group
+      = f.label :title, class: 'col-xs-3 control-label control-label-required'
+      .col-xs-9
+        = f.text_field :title, class: 'form-control'
+
+    .form-group
+      = f.label :opened_on, class: 'col-xs-3 control-label control-label-required'
+      .col-xs-9
+        = f.date_field :opened_on, class: 'form-control'
+
+    .form-group
+      = f.label :report_images, class: 'col-sm-2 control-label'
+      .col-sm-10#report-images
+        = f.fields_for :report_images do |report_image_f|
+          = render 'report_image_fields', f: report_image_f
+
+        %p= link_to_add_association '追加', f, :report_images
+
+    #editor.form-group
+      .col-xs-12
+        = f.label :content, class: 'control-label control-label-required pull-left'
+      .col-xs-12
+        = f.text_area :content, size: '50×50', class: 'form-control', 'v-model': 'input', debounce: '50'
+        #preview{ 'v-html': 'input | marked', style: "width: 650px;" }
+
+    .form-group
+      .col-xs-12.pull-right
+        = f.submit 'create', class: 'btn btn-primary btn-block'

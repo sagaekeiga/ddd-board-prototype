@@ -1,0 +1,10 @@
+.page-header
+  %h1
+    = controller.action_name == 'index' ? 'DDD Board Prototype' : controller.action_name.capitalize + ' Board'
+    %small <code>分析モデル</code>と<code>実装モデル</code>を一致させるためのスペースです。
+
+.row
+  .col-xs-12
+    %p <code>Value Proposition Canvas</code>を使用して実装モデルと一致しているかを確認できます。
+    %p
+      %a{ href: '#menu-toggle', class: 'btn btn-primary', id: 'menu-toggle' } Toggle Menu

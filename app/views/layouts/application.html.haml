@@ -1,10 +1,37 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }/
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
     %title DddBoardPrototype
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.js'
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.js'
+    = analytics_init if Rails.env.production?
   %body
-    = yield
+    #wrapper
+      -# Sidebar
+      #sidebar-wrapper
+        %ul.sidebar-nav
+          %li.idebar-brand
+            = link_to 'Dashboard', root_path
+          %li.idebar-brand
+            = link_to 'Models', dashboards_models_path
+          %li.idebar-brand
+            = link_to 'Controllers', dashboards_controllers_path
+          %li.idebar-brand
+            = link_to 'Views', dashboards_views_path
+          %li.idebar-brand
+            = link_to 'Ubiquitous Terms', ubiquitous_terms_path
+          %li.idebar-brand
+            = link_to 'Reports', reports_path
+
+      -# Page Content
+      #page-content-wrapper
+        .container-fluid
+          - !content_for?(:flash) && flash && flash.each do |key, message|
+            .alert{ class: "alert-#{key}", role: 'alert' }
+              %strong= message
+          = yield

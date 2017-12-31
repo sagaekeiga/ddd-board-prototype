@@ -1,0 +1,25 @@
+.pict-new-selects
+  .modal-dialog
+    .modal-content.col-xs-12
+      .modal-body
+        = form_for @pictgram, html: { class: 'form-horizontal', role: 'form' } do |f|
+          = f.hidden_field :td_number, value: @index
+          = f.hidden_field :status, id: 'status-field'
+          .form-group= link_to 'エレメントを登録する', element_pictgrams_path, method: :post, remote: true, class: 'btn btn-default btn-block'
+          .form-group= link_to 'コネクタを登録する', connector_pictgrams_path, method: :post, remote: true, class: 'btn btn-default btn-block'
+          #element-form.hidden.form-group
+            Element:
+            = f.collection_select :domain_id, Domain.all, :id, :logical_name, include_blank: true, class: 'form-control'
+          #connector-form.hidden.form-group
+            Connector Name:
+            = f.collection_select :connector_id, Connector.all, :id, :select_name, include_blank: true, class: 'form-control'
+            Connector Income Line:
+            = f.text_field :income_line, class: 'form-control'
+            Connector Outcome Line:
+            = f.text_field :outcome_line, class: 'form-control'
+          #note-form.hidden.form-group
+            Note:
+            = f.text_area :note, size: '30×30', class: 'form-control'
+          #submit-button.hidden.form-group
+            .col-xs-12
+              = f.submit 'create', class: 'btn btn-primary btn-block'

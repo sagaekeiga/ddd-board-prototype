@@ -1,0 +1,19 @@
+%h1= controller.action_name == 'index' ? 'DDD Board Prototype' : controller.action_name.capitalize + ' Board'
+%p Viewを開くことができます。各Viewの相対パス（GETのみ）を取得して表示します。
+
+%p
+  %a{ href: '#menu-toggle', class: 'btn btn-primary', id: 'menu-toggle' } Toggle Menu
+
+
+.row
+  .col-xs-12
+    %table.table.table-bordered.table-striped
+      %thead
+        %tr
+          %th{ scope: 'col' } #
+          %th{ scope: 'col' } Domain Name
+      %tbody
+        - @routes.routes.select{ |route| route.verb == 'GET' }.each.with_index do |route, index|
+          %tr
+            %th{ scope: 'row' }= index
+            %td= link_to route.path.spec.to_s.gsub(':id', '1').gsub('(.:format)', ''), route.path.spec.to_s.gsub(':id', '1').gsub('(.:format)', '')

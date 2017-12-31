@@ -1,0 +1,2 @@
+alphabet: <%= [*'a'..'z'] %>
+tr_alphabet: <%= [*'a'..'k'] %>
