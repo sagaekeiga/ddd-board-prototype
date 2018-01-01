@@ -20,4 +20,8 @@ class Domain < ApplicationRecord
   # Validations
   # -------------------------------------------------------------------------------
   validates :logical_name, presence: true, uniqueness: true
+
+  def self.present_by_td_number?(td_number)
+    find_by(id: Pictgram.find_by_td_number(td_number).domain_id)
+  end
 end

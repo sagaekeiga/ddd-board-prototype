@@ -8,16 +8,5 @@ UbiquitousTerm.create([
 
 # コネクタの作成
 Connector.create([
-  { show_name: '商品', select_name: '商品 ↑', direction: 'fa fa-long-arrow-up' },
-  { show_name: '商品', select_name: '商品 ←', direction: 'fa fa-long-arrow-left' },
-  { show_name: '商品', select_name: '商品 →', direction: 'fa fa-long-arrow-right' },
-  { show_name: '商品', select_name: '商品 ↓', direction: 'fa fa-long-arrow-down' },
-  { show_name: 'マーケティング', select_name: 'マーケティング ↑', direction: 'fa fa-long-arrow-up' },
-  { show_name: 'マーケティング', select_name: 'マーケティング ←', direction: 'fa fa-long-arrow-left' },
-  { show_name: 'マーケティング', select_name: 'マーケティング →', direction: 'fa fa-long-arrow-right' },
-  { show_name: 'マーケティング', select_name: 'マーケティング ↓', direction: 'fa fa-long-arrow-down' },
-  { show_name: 'お金', select_name: 'お金 ↑', direction: 'fa fa-long-arrow-up' },
-  { show_name: 'お金', select_name: 'お金 ←', direction: 'fa fa-long-arrow-left' },
-  { show_name: 'お金', select_name: 'お金 →', direction: 'fa fa-long-arrow-right' },
-  { show_name: 'お金', select_name: 'お金 ↓', direction: 'fa fa-long-arrow-down' }
+  { symbol: '↑' }, { symbol: '←' }, { symbol: '→' }, { symbol: '↓' }
 ])

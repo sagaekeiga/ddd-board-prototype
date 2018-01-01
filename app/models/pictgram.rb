@@ -43,4 +43,24 @@ class Pictgram < ApplicationRecord
   def self.count_elements(tr_symbol)
     where('td_number LIKE ?', "#{tr_symbol}%").element.count
   end
+
+  def self.present_by_td_number?(td_number)
+    find_by(td_number: td_number).present?
+  end
+
+  def self.element?(td_number)
+    pictgram = find_by(td_number: td_number)
+    return pictgram && pictgram.element?
+  end
+
+
+  def self.connector?(td_number)
+    pictgram = find_by(td_number: td_number)
+    return pictgram && pictgram.connector?
+  end
+
+  def self.find_by_td_number(td_number)
+    find_by(td_number: td_number)
+  end
+
 end

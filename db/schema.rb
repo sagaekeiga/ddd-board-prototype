@@ -22,9 +22,7 @@ ActiveRecord::Schema.define(version: 20180101080746) do
   end
 
   create_table "connectors", force: :cascade do |t|
-    t.string "show_name"
-    t.string "select_name"
-    t.string "direction"
+    t.string "symbol"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -37,7 +35,6 @@ ActiveRecord::Schema.define(version: 20180101080746) do
   end
 
   create_table "domains", force: :cascade do |t|
-    t.integer "structure"
     t.string "physical_name"
     t.string "logical_name"
     t.text "note"
@@ -46,6 +43,9 @@ ActiveRecord::Schema.define(version: 20180101080746) do
   end
 
   create_table "issues", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,8 +70,7 @@ ActiveRecord::Schema.define(version: 20180101080746) do
   create_table "pictgrams", force: :cascade do |t|
     t.bigint "connector_id"
     t.bigint "domain_id"
-    t.string "income_line"
-    t.string "outcome_line"
+    t.string "spending_line"
     t.string "td_number"
     t.text "note"
     t.integer "status"

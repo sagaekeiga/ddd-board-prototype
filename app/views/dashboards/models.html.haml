@@ -13,18 +13,11 @@
         - Settings[:tr_alphabet].each.with_index(1) do |tr_symbol, index|
           %tr
             - td_times(tr_symbol).times do |td_number|
-              %td{ rowspan: return_two_span(tr_symbol + td_number.to_s), class: 'square-box' }
+              %td{ rowspan: return_two_span(tr_symbol + td_number.to_s), class: Pictgram.present_by_td_number?(tr_symbol + td_number.to_s) ? 'active' : ''  }
                 .content
-                  - if Pictgram.find_by(td_number: tr_symbol + td_number.to_s).present?
-                    - if Domain.find_by(id: Pictgram.find_by(td_number: tr_symbol + td_number.to_s).domain_id)
-                      %i.fa.fa-user-circle-o
-                      .caption= Domain.find_by(id: Pictgram.find_by(td_number: tr_symbol + td_number.to_s).domain_id).logical_name
-                    - else
-                      = Connector.find_by(id: Pictgram.find_by(td_number: tr_symbol + td_number.to_s).connector_id).show_name
-                      %i{ class: "#{Connector.find_by(id: Pictgram.find_by(td_number: tr_symbol + td_number.to_s).connector_id).direction}" }
-                  - else
-                    = link_to '　', new_pictgram_path(td_number: tr_symbol + td_number.to_s), remote: true
+                  = show_pictgrams(tr_symbol + td_number.to_s)
                 #new-selects.modal.fade{ tabindex: '-1', role: 'dialog', 'aria-hidden': 'true' }
+                #pictgram-show-page.modal.fade{ tabindex: '-1', role: 'dialog', 'aria-hidden': 'true' }
 
 .row
   .col-xs-12

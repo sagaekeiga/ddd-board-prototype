@@ -29,6 +29,11 @@ class PictgramsController < ApplicationController
   def connector
   end
 
+  def show
+    @pictgram = Pictgram.find(params[:id])
+    @domain = Domain.find(@pictgram.domain_id)
+  end
+
   private
 
   # @TODO statusごとにパラメータ分ける
@@ -37,8 +42,7 @@ class PictgramsController < ApplicationController
       :domain_id,
       :connector_id,
       :td_number,
-      :income_line,
-      :outcome_line,
+      :spending_line,
       :note,
       :status
     )

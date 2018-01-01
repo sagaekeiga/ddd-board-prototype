@@ -16,6 +16,11 @@
 
 FactoryBot.define do
   factory :pictgram do
-    
+    connector_id nil
+    domain_id nil
+    spending_line nil
+    td_number nil
+    note { Faker::Lorem.paragraph }
+    status nil
   end
 end

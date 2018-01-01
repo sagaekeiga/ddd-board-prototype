@@ -7,16 +7,6 @@ class DomainsController < ApplicationController
   #
   before_action :set_domain, only: %i(edit update)
 
-  # POST /domains
-  def create
-    @models = ActiveRecord::Base.connection.tables.map{ |table| Object.const_get(table.classify) rescue nil }.select{ |model_name| model_name.present? }
-    @models.each do |model_name|
-      Domain.create(logical_name: model_name)
-    end
-    @domains = Domain.all
-    redirect_to dashboards_models_url(@domains)
-  end
-
   # GET /domains/1/edit
   def edit
   end

@@ -44,7 +44,7 @@
             #bs-example-navbar-collapse-1.collapse.navbar-collapse
               %ul.nav.navbar-nav.navbar-right
                 %li
-                  = link_to 'Refresh Model', domains_path, method: :post
+                  %a Page
 
         - !content_for?(:flash) && flash && flash.each do |key, message|
           .alert{ class: "alert-#{key}", role: 'alert' }

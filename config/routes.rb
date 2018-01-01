@@ -61,13 +61,13 @@
 #                          PATCH  /documents/:id(.:format)             documents#update
 #                          PUT    /documents/:id(.:format)             documents#update
 #                          DELETE /documents/:id(.:format)             documents#destroy
-# 
+#
 
 Rails.application.routes.draw do
   root to: 'dashboards#index'
 
   # ドメイン
-  resources :domains, only: %i(create edit update)
+  resources :domains, only: %i(edit update)
   # ダッシュボード
   namespace :dashboards do
     get 'models'
