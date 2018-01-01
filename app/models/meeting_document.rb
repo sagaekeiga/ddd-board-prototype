@@ -1,25 +1,25 @@
 # == Schema Information
 #
-# Table name: report_images
+# Table name: meeting_documents
 #
 #  id         :integer          not null, primary key
-#  report_id  :integer
-#  image      :string           not null
+#  meeting_id :integer
+#  document   :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class ReportImage < ApplicationRecord
+class MeetingDocument < ApplicationRecord
   # -------------------------------------------------------------------------------
   # Relations
   # -------------------------------------------------------------------------------
-  belongs_to :report
+  belongs_to :meeting
 
   # CarrierWave
-  mount_uploader :image, ReportImageUploader
+  mount_uploader :document, MeetingDocumentUploader
 
   # -------------------------------------------------------------------------------
   # Validations
   # -------------------------------------------------------------------------------
-  validates :image, presence: true
+  validates :document, presence: true
 end

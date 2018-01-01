@@ -1,6 +1,6 @@
-class CreateReports < ActiveRecord::Migration[5.1]
+class CreateMeetings < ActiveRecord::Migration[5.1]
   def change
-    create_table :reports do |t|
+    create_table :meetings do |t|
       t.string :title
       t.text :content
       t.datetime :opened_on

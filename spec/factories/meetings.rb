@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: reports
+# Table name: meetings
 #
 #  id         :integer          not null, primary key
 #  title      :string
@@ -12,13 +12,13 @@
 #
 
 FactoryBot.define do
-  factory :report do
+  factory :meeting do
     title { Faker::Commerce.product_name }
     content { Faker::Lorem.paragraph }
     opened_on Time.zone.today
-    trait :with_report_image do
-      after(:create) do |report|
-        create_list(:report_image, 3, report: report)
+    trait :with_meeting_document do
+      after(:create) do |meeting|
+        create_list(:meeting_document, 3, meeting: meeting)
       end
     end
   end

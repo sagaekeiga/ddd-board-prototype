@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171231051913) do
+ActiveRecord::Schema.define(version: 20180101080746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +29,40 @@ ActiveRecord::Schema.define(version: 20171231051913) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "domains", force: :cascade do |t|
     t.integer "structure"
     t.string "physical_name"
     t.string "logical_name"
     t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "issues", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "meeting_documents", force: :cascade do |t|
+    t.bigint "meeting_id"
+    t.string "document", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_meeting_documents_on_meeting_id"
+  end
+
+  create_table "meetings", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "opened_on"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,23 +81,6 @@ ActiveRecord::Schema.define(version: 20171231051913) do
     t.index ["domain_id"], name: "index_pictgrams_on_domain_id"
   end
 
-  create_table "report_images", force: :cascade do |t|
-    t.bigint "report_id"
-    t.string "image", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["report_id"], name: "index_report_images_on_report_id"
-  end
-
-  create_table "reports", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.datetime "opened_on"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "ubiquitous_terms", force: :cascade do |t|
     t.string "domain_name"
     t.string "program_singularized_name"
@@ -78,5 +90,5 @@ ActiveRecord::Schema.define(version: 20171231051913) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "report_images", "reports"
+  add_foreign_key "meeting_documents", "meetings"
 end

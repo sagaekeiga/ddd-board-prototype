@@ -1,0 +1,39 @@
+.page-header
+  .btn-toolbar.pull-right
+    .btn-group
+      = link_to domains_path, class: 'btn btn-default' do
+        %span.glyphicon.glyphicon-list-alt Back
+  %h2= title controller.controller_name
+
+.col-xs-12
+  = form_for @domain, html: { class: 'form-horizontal', role: 'form' } do |f|
+
+    - if @domain.errors.any?
+      .alert.alert-danger.alert-dismissable{ role: 'alert' }
+        %button.close{ type: 'button', data: { dismiss: 'alert' } }
+          %span{ aria: { hidden: 'true' } } &times;
+          %span.sr-only Close
+        %h4= "#{pluralize(@domain.errors.count, t('.errors'))}"
+
+        %ul
+          - @domain.errors.full_messages.each do |msg|
+            %li= msg
+
+    .form-group
+      = f.label :physical_name, class: 'col-xs-3 control-label control-label-required'
+      .col-xs-9
+        = f.text_field :physical_name, class: 'form-control'
+
+    .form-group
+      = f.label :logical_name, class: 'col-xs-3 control-label control-label-required'
+      .col-xs-9
+        = f.text_field :logical_name, class: 'form-control'
+
+    .form-group
+      = f.label :note, class: 'col-xs-3 control-label control-label-required'
+      .col-xs-9
+        = f.text_area :note, class: 'form-control'
+
+    .form-group
+      .col-xs-2.pull-right
+        = f.submit 'create', class: 'btn btn-primary btn-block'

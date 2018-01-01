@@ -27,8 +27,6 @@
                 #new-selects.modal.fade{ tabindex: '-1', role: 'dialog', 'aria-hidden': 'true' }
 
 .row
-  = link_to '作成', domains_path, method: :post, class: 'btn btn-primary btn-block'
-  %a{ href: '#menu-toggle', class: 'btn btn-primary', id: 'menu-toggle' } Toggle Menu
   .col-xs-12
     %h3.title-bar 実装モデル
     %p アプリケーションファイルを読み込んで自動で実装モデルを作図します。
@@ -54,46 +52,25 @@
             %td= domain.note
 
 .row
-  .col-xs-12
-    %h3.title-bar 実装モデル 詳細
   - @domains.each do |domain|
-    .col-md-6.col-xs-12
-      %h4.logical-name-bar
-        = domain.logical_name
-
-      %table.table.table-bordered
-        %thead
-          %tr.active
-            %th{ scope: 'col' } No.
-            %th{ scope: 'col' }
-        %tbody
-          %tr
-            %td domain id
-            %td= domain.id
-          %tr
-            %td domain physical_name
-            %td= domain.physical_name
-          %tr
-            %td domain logical_name
-            %td= domain.logical_name
-          %tr
-            %td domain note
-            %td= domain.note
-          %tr
-            %td Relation（belongs_to)
-            %td
+    .col-xs-6
+      .panel.panel-default
+        .panel-heading
+          = domain.logical_name
+          .pull-right
+            = link_to edit_domain_path(domain.id) do
+              %span.glyphicon.glyphicon-list-alt
+        .panel-body
+          %small= domain.note
+          %ul.list-group
+            %li.list-group-item= domain.id
+            %li.list-group-item= domain.physical_name
+            %li.list-group-item
               - domain.logical_name.constantize.reflect_on_all_associations(:belongs_to).each do |belongs_to_model|
                 = belongs_to_model.plural_name
-          %tr
-            %td Relation（has_many)
-            %td
+            %li.list-group-item
               - domain.logical_name.constantize.reflect_on_all_associations(:has_many).each do |has_many_model|
                 = has_many_model.plural_name
-          %tr
-            %td Relation（has_one)
-            %td
+            %li.list-group-item
               - domain.logical_name.constantize.reflect_on_all_associations(:has_one).each do |has_one_model|
                 = has_one_model.plural_name
-      .col-xs-4.pull-right
-        = link_to edit_domain_path(domain.id), class: 'btn btn-default btn-block' do
-          %span.glyphicon.glyphicon-list-alt Edit

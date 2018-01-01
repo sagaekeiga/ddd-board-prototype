@@ -1,6 +1,4 @@
-class ReportImageUploader < CarrierWave::Uploader::Base
-  # サムネイルを作成するためにRMagickを利用
-    # include CarrierWave::RMagick
+class MeetingDocumentUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -15,15 +13,6 @@ class ReportImageUploader < CarrierWave::Uploader::Base
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
-
-  # process :fix_exif_rotation
-
-  #
-  # サムネイル
-  #
-  # version :thumb_400x400 do
-  #   process resize_to_fill: [400, 400]
-  # end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
@@ -56,23 +45,5 @@ class ReportImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-  def filename
-    "#{secure_token}.#{file.extension}" if original_filename.present?
-  end
 
-  #
-  # EXIF情報を削除
-  #
-  # def fix_exif_rotation
-  #   manipulate! do |img|
-  #     img.tap(&:auto_orient!)
-  #   end
-  # end
-
-  protected
-
-  def secure_token
-    var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) || model.instance_variable_set(var, Digest::MD5.hexdigest(Time.current.to_f.to_s))
-  end
 end

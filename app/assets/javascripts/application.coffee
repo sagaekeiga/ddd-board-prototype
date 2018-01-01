@@ -19,6 +19,7 @@
 #= require bootstrap-fileinput
 #= require bootstrap-fileinput/locales/ja
 #= require moment
+#= require fullcalendar
 #= require moment/locale/ja
 #= require cocoon
 #= require turbolinks
@@ -40,11 +41,9 @@ $(document).on 'turbolinks:load', ->
   #
   # Sidebar
   #
-  $('#wrapper').toggleClass 'toggled'
-  $('#menu-toggle').click (e) ->
-    e.preventDefault()
-    $('#wrapper').toggleClass 'toggled'
-
+  $('#sidebarCollapse').on 'click', ->
+    $('#sidebar').toggleClass 'active'
+    $(this).toggleClass 'active'
   #
   # Preview
   #
@@ -66,3 +65,8 @@ $(document).on 'turbolinks:load', ->
         return
       return
     return
+
+  #
+  # calendar
+  #
+  $('#calendar').fullCalendar()

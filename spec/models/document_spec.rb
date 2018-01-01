@@ -1,16 +1,16 @@
 # == Schema Information
 #
-# Table name: report_images
+# Table name: documents
 #
 #  id         :integer          not null, primary key
-#  report_id  :integer
-#  image      :string           not null
+#  title      :string
+#  content    :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 require 'rails_helper'
 
-RSpec.describe ReportImage, type: :model do
+RSpec.describe Document, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

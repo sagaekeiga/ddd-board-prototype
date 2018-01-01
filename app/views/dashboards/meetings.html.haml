@@ -1,0 +1,19 @@
+.page-header
+  .btn-toolbar.pull-right
+    .btn-group
+      = link_to new_meeting_path, class: 'btn btn-default' do
+        %span.glyphicon.glyphicon-list-alt New
+  %h2= title controller.controller_name
+
+.row
+  - @meetings.each do |meeting|
+    .col-xs-12
+      .panel.panel-default
+        .panel-heading= meeting.title
+        .panel-body
+          .col-xs-12= meeting.opened_on
+          .col-xs-12= qiita_markdown(meeting.content)
+          - meeting.meeting_documents.each do |meeting_document|
+            .col-xs-12
+              .thumbnail
+                = image_tag meeting_document.document.url

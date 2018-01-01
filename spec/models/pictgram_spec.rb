@@ -3,8 +3,10 @@
 # Table name: pictgrams
 #
 #  id           :integer          not null, primary key
-#  domain_id    :integer
 #  connector_id :integer
+#  domain_id    :integer
+#  income_line  :string
+#  outcome_line :string
 #  td_number    :string
 #  note         :text
 #  status       :integer

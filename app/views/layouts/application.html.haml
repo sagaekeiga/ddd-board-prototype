@@ -11,27 +11,42 @@
     = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.js'
     = analytics_init if Rails.env.production?
   %body
-    #wrapper
+    .wrapper
       -# Sidebar
-      #sidebar-wrapper
-        %ul.sidebar-nav
-          %li.idebar-brand
+      %nav#sidebar
+        .sidebar-header
+          %h3 DDD Board Prototype
+        %ul.list-unstyled.components
+          %li
             = link_to 'Dashboard', root_path
-          %li.idebar-brand
-            = link_to 'Models', dashboards_models_path
-          %li.idebar-brand
-            = link_to 'Controllers', dashboards_controllers_path
-          %li.idebar-brand
-            = link_to 'Views', dashboards_views_path
-          %li.idebar-brand
-            = link_to 'Ubiquitous Terms', ubiquitous_terms_path
-          %li.idebar-brand
-            = link_to 'Reports', reports_path
+          %li
+            = link_to 'Architectures', dashboards_architectures_path
+          %li
+            = link_to "Models　#{Domain.count}", dashboards_models_path
+          %li
+            = link_to "Ubiquitous Terms　#{UbiquitousTerm.count}", ubiquitous_terms_path
+          %li
+            = link_to "Issues", dashboards_issues_path
+          %li
+            = link_to "Meetings #{Meeting.count}", dashboards_meetings_path
+          %li
+            = link_to "Document　#{Document.count}", dashboards_documents_path
 
       -# Page Content
-      #page-content-wrapper
-        .container-fluid
-          - !content_for?(:flash) && flash && flash.each do |key, message|
-            .alert{ class: "alert-#{key}", role: 'alert' }
-              %strong= message
-          = yield
+      #content
+        %nav.navbar.navbar-default
+          .container-fluid
+            .navbar-header
+              %button{ type: 'button', id: 'sidebarCollapse', class: 'navbar-btn' }
+                %span
+                %span
+                %span
+            #bs-example-navbar-collapse-1.collapse.navbar-collapse
+              %ul.nav.navbar-nav.navbar-right
+                %li
+                  = link_to 'Refresh Model', domains_path, method: :post
+
+        - !content_for?(:flash) && flash && flash.each do |key, message|
+          .alert{ class: "alert-#{key}", role: 'alert' }
+            %strong= message
+        = yield

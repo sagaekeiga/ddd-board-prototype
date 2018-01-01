@@ -112,13 +112,13 @@ gem 'breadcrumbs_on_rails'
 gem 'i18n-tasks'
 gem 'google-analytics-rails'
 gem 'dotenv-rails'
-gem 'gentelella-rails'
 
 # マークダウン
 gem 'qiita-markdown'
 gem 'github-linguist'
 
 gem 'honoka-rails'
+gem 'fullcalendar-rails'
 
 group :development, :test do
   gem 'timecop'
