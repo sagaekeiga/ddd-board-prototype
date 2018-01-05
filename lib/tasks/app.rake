@@ -8,7 +8,6 @@ namespace :app do
       model_names.each { |model_name| Domain.create(logical_name: model_name) }
 
       # FactoryBot
-      FactoryBot.create_list(:meeting, 2, :with_meeting_document)
       FactoryBot.create(:pictgram, domain_id: Domain.first.id, td_number: 'a3', status: 1000)
       FactoryBot.create(:pictgram, connector_id: Connector.second.id, spending_line: '商品', td_number: 'a4', status: 2000)
     end

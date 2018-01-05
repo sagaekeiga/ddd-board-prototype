@@ -2,12 +2,10 @@
 #
 # Table name: connectors
 #
-#  id          :integer          not null, primary key
-#  show_name   :string
-#  select_name :string
-#  direction   :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id         :integer          not null, primary key
+#  symbol     :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 require 'rails_helper'

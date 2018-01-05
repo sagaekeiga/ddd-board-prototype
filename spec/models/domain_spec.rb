@@ -3,7 +3,6 @@
 # Table name: domains
 #
 #  id            :integer          not null, primary key
-#  structure     :integer
 #  physical_name :string
 #  logical_name  :string
 #  note          :text

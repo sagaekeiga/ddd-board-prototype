@@ -10,16 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180101080746) do
+ActiveRecord::Schema.define(version: 20180101074157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "architectures", force: :cascade do |t|
-    t.integer "layer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "connectors", force: :cascade do |t|
     t.string "symbol"
@@ -50,23 +44,6 @@ ActiveRecord::Schema.define(version: 20180101080746) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "meeting_documents", force: :cascade do |t|
-    t.bigint "meeting_id"
-    t.string "document", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["meeting_id"], name: "index_meeting_documents_on_meeting_id"
-  end
-
-  create_table "meetings", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.datetime "opened_on"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "pictgrams", force: :cascade do |t|
     t.bigint "connector_id"
     t.bigint "domain_id"
@@ -89,5 +66,4 @@ ActiveRecord::Schema.define(version: 20180101080746) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "meeting_documents", "meetings"
 end

@@ -20,15 +20,11 @@
           %li
             = link_to 'Dashboard', root_path
           %li
-            = link_to 'Architectures', dashboards_architectures_path
-          %li
             = link_to "Models　#{Domain.count}", dashboards_models_path
           %li
             = link_to "Ubiquitous Terms　#{UbiquitousTerm.count}", ubiquitous_terms_path
           %li
             = link_to "Issues", dashboards_issues_path
-          %li
-            = link_to "Meetings #{Meeting.count}", dashboards_meetings_path
           %li
             = link_to "Document　#{Document.count}", dashboards_documents_path
 

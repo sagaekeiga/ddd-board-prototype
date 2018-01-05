@@ -2,7 +2,6 @@
 #
 #                   Prefix Verb   URI Pattern                          Controller#Action
 #                     root GET    /                                    dashboards#index
-#                  domains POST   /domains(.:format)                   domains#create
 #              edit_domain GET    /domains/:id/edit(.:format)          domains#edit
 #                   domain PATCH  /domains/:id(.:format)               domains#update
 #                          PUT    /domains/:id(.:format)               domains#update
@@ -19,14 +18,6 @@
 #                          PATCH  /ubiquitous_terms/:id(.:format)      ubiquitous_terms#update
 #                          PUT    /ubiquitous_terms/:id(.:format)      ubiquitous_terms#update
 #                          DELETE /ubiquitous_terms/:id(.:format)      ubiquitous_terms#destroy
-#                 meetings GET    /meetings(.:format)                  meetings#index
-#                          POST   /meetings(.:format)                  meetings#create
-#              new_meeting GET    /meetings/new(.:format)              meetings#new
-#             edit_meeting GET    /meetings/:id/edit(.:format)         meetings#edit
-#                  meeting GET    /meetings/:id(.:format)              meetings#show
-#                          PATCH  /meetings/:id(.:format)              meetings#update
-#                          PUT    /meetings/:id(.:format)              meetings#update
-#                          DELETE /meetings/:id(.:format)              meetings#destroy
 #        element_pictgrams POST   /pictgrams/element(.:format)         pictgrams#element
 #      connector_pictgrams POST   /pictgrams/connector(.:format)       pictgrams#connector
 #                pictgrams GET    /pictgrams(.:format)                 pictgrams#index
@@ -37,14 +28,6 @@
 #                          PATCH  /pictgrams/:id(.:format)             pictgrams#update
 #                          PUT    /pictgrams/:id(.:format)             pictgrams#update
 #                          DELETE /pictgrams/:id(.:format)             pictgrams#destroy
-#            architectures GET    /architectures(.:format)             architectures#index
-#                          POST   /architectures(.:format)             architectures#create
-#         new_architecture GET    /architectures/new(.:format)         architectures#new
-#        edit_architecture GET    /architectures/:id/edit(.:format)    architectures#edit
-#             architecture GET    /architectures/:id(.:format)         architectures#show
-#                          PATCH  /architectures/:id(.:format)         architectures#update
-#                          PUT    /architectures/:id(.:format)         architectures#update
-#                          DELETE /architectures/:id(.:format)         architectures#destroy
 #                   issues GET    /issues(.:format)                    issues#index
 #                          POST   /issues(.:format)                    issues#create
 #                new_issue GET    /issues/new(.:format)                issues#new
@@ -61,7 +44,7 @@
 #                          PATCH  /documents/:id(.:format)             documents#update
 #                          PUT    /documents/:id(.:format)             documents#update
 #                          DELETE /documents/:id(.:format)             documents#destroy
-#
+# 
 
 Rails.application.routes.draw do
   root to: 'dashboards#index'
@@ -78,8 +61,6 @@ Rails.application.routes.draw do
   end
   # ユビキタス言語
   resources :ubiquitous_terms
-  # ミーティングの管理
-  resources :meetings
   # ピクトグラム作成
   resources :pictgrams do
     collection do
@@ -87,8 +68,6 @@ Rails.application.routes.draw do
       post 'connector'
     end
   end
-  # アーキテクチャ
-  resources :architectures
   # ISSUE
   resources :issues
   # ドキュメント
